@@ -20,3 +20,5 @@ export const initialize = () => {
 
   return { pressTaskBtn, pressDialogBtn };
 };
+
+//refactor, make the eventlistener functions elsewhere so code isnt so tight
