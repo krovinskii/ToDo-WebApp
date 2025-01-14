@@ -280,6 +280,7 @@ textarea {
   filter: invert(92%) sepia(6%) saturate(20%) hue-rotate(299deg)
     brightness(112%) contrast(87%);
 }
-#closeProjectBtn {
+#closeProjectBtn,
+#submitProjectBtn {
   margin-bottom: 1rem;
 }
