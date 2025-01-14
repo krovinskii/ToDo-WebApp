@@ -38,7 +38,26 @@
           <button class="deleteBtn">X</button>
         </div>
       </div>
-      <div class="addTask"><button class="addTaskBtn">Add Task</button></div>
+      <div class="addTask">
+        <button class="addTaskBtn" id="addTaskBtn">Add Task</button>
+      </div>
     </div>
+
+    <dialog id="taskModal" class="modal">
+      <div class="taskModalText">What would you like to accomplish?</div>
+      <form id="taskForm">
+        <label for="task">Task:</label>
+        <textarea id="userTaskInput" name="task" rows="2"></textarea>
+        <label for="date">Date:</label>
+        <input type="date" id="userDateInput" name="date" />
+        <label for="time">Time:</label>
+        <input type="time" id="userTimeInput" name="time" />
+        <label for="location">Location:</label>
+        <input type="text" id="userLocationInput" name="location" />
+        <label for="task">Completed:</label>
+        <input type="checkbox" id="userCompletedInput" name="completed" />
+      </form>
+      <button class="closeBtn" id="closeBtn">X</button>
+    </dialog>
   </body>
 </html>

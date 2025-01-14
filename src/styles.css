@@ -145,3 +145,68 @@ body {
   align-items: center;
   color: #004e76;
 }
+.modal {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  height: 50vh;
+  width: 40vw;
+  border-radius: 10px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  flex-direction: column;
+}
+.taskModalText {
+  align-self: center;
+  justify-self: center;
+  padding: 1rem 0rem;
+  font-size: clamp(1.25rem, 1.5rem, 1.75rem);
+  font-weight: 500;
+  color: #004e76;
+  background-color: #0088cc;
+  width: 100%;
+  text-align: center;
+  color: #eeeeee;
+}
+#taskForm {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem 0rem 2rem;
+  color: #004e76;
+  font-size: 1.3rem;
+}
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black backdrop */
+}
+#userCompletedInput {
+  align-self: flex-end;
+}
+#userDateInput,
+#userTimeInput {
+  text-align: right;
+}
+form input,
+textarea {
+  margin-bottom: 2rem;
+}
+textarea {
+  resize: none;
+}
+.closeBtn {
+  margin-top: auto;
+  margin-bottom: 2rem;
+  background-color: red;
+  color: #eeeeee;
+  font-size: 3rem;
+  border: none;
+  width: 33%;
+  align-self: center;
+  border-radius: 10px;
+}
+#userCompletedInput {
+  padding: 0;
+  margin: 0;
+}
