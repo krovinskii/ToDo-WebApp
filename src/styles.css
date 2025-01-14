@@ -87,6 +87,9 @@ body {
 }
 .appDisplayCompletedData {
   text-align: center;
+
+  display: flex;
+  justify-content: center;
 }
 .appDisplayTitle {
   font-weight: 600;
@@ -118,4 +121,27 @@ body {
   border: none;
   background-color: #0088cc;
   color: #eeeeee;
+}
+.appDisplayDeleteRow {
+  grid-column: 6/6;
+
+  display: flex;
+  justify-content: center;
+}
+.deleteBtn {
+  padding: 0.35rem 0.75rem;
+  text-align: center;
+  background-color: red;
+  border-radius: 5px;
+  border: none;
+  color: #eeeeee;
+}
+.appDisplayCompletedData,
+.appDisplayDateTimeData,
+.appDisplayDeleteRow,
+.appDisplayLocationData,
+.appDisplayTaskData {
+  display: flex;
+  align-items: center;
+  color: #004e76;
 }
