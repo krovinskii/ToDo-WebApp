@@ -1,8 +1,16 @@
 import "./styles.css";
-import { initialize } from "./addTask.js";
-import { greeting } from "./addTask.js";
+import { initialize } from "./eventListeners.js";
+
+//When DOM is loaded, we set up all of our buttons functionality.
 document.addEventListener("DOMContentLoaded", () => {
-  const { pressTaskBtn, pressDialogBtn } = initialize();
-  pressTaskBtn();
-  pressDialogBtn();
+  const {
+    addTaskButtonListener,
+    closeTaskModalListener,
+    addProjectButtonListener,
+    closeProjectModalListener,
+  } = initialize();
+  addTaskButtonListener();
+  closeTaskModalListener();
+  addProjectButtonListener();
+  closeProjectModalListener();
 });

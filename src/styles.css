@@ -54,7 +54,6 @@ body {
   display: grid;
   grid-template-columns: 0.5fr 4fr 2fr 4fr 1fr 0.5fr;
   grid-template-rows: 1fr repeat(10, 1fr);
-  padding-top: 1rem;
   width: 100%;
   height: fit-content;
   row-gap: 1rem;
@@ -116,11 +115,12 @@ body {
   margin: auto 0.75rem 0.75rem 0rem;
 }
 .addTaskBtn {
-  padding: 1rem 4rem;
+  padding: 0.75rem 2rem;
   border-radius: 8px;
   border: none;
   background-color: #0088cc;
   color: #eeeeee;
+  font-size: 1.75rem;
 }
 .appDisplayDeleteRow {
   grid-column: 6/6;
@@ -184,29 +184,102 @@ body {
 #userCompletedInput {
   align-self: flex-end;
 }
-#userDateInput,
-#userTimeInput {
-  text-align: right;
+#userDateInput {
+  direction: rtl;
 }
 form input,
 textarea {
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 textarea {
   resize: none;
 }
-.closeBtn {
+.btnHolder {
   margin-top: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
+  display: flex;
+  gap: 5rem;
+  justify-content: center;
+}
+.closeBtn {
   background-color: red;
   color: #eeeeee;
-  font-size: 3rem;
+  font-size: 1.75rem;
   border: none;
-  width: 33%;
+  width: 20%;
+  height: 3rem;
   align-self: center;
   border-radius: 10px;
+  text-align: center;
+  padding: 0.25rem;
+}
+.submitBtn {
+  background-color: #0088cc;
+  color: #eeeeee;
+  font-size: 1.75rem;
+  border: none;
+  width: 20%;
+  height: 3rem;
+  align-self: center;
+  border-radius: 10px;
+  text-align: center;
+  padding: 0.25rem;
 }
 #userCompletedInput {
   padding: 0;
   margin: 0;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+.completedContainer {
+  display: flex;
+  justify-content: space-between;
+}
+/*Project Section------------------------------------------------*/
+.projectTabs {
+  width: 100%;
+  padding: 0rem 3rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.projectHolder ul {
+  display: flex;
+}
+
+.projectHolder li:first-of-type {
+  background-color: #0088cc;
+  padding: 0.8rem;
+  border-radius: 8px 8px 0px 0px;
+  color: #eeeeee;
+  -webkit-box-shadow: 9px 0px 12px -5px rgba(0, 0, 0, 0.39);
+  -moz-box-shadow: 9px 0px 12px -5px rgba(0, 0, 0, 0.39);
+  box-shadow: 9px 0px 12px -5px rgba(0, 0, 0, 0.39);
+  z-index: 1;
+}
+.projectHolder li {
+  background-color: #0372a9;
+  padding: 0.8rem;
+  border-radius: 8px 8px 0px 0px;
+  color: #dfdfdf;
+}
+.addProjectBtn {
+  background-color: #0088cc;
+  padding: 0.8rem;
+  border-radius: 8px 8px 0px 0px;
+  color: #dfdfdf;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.addProjectBtn img {
+  height: 1.25rem;
+  width: auto;
+  filter: invert(92%) sepia(6%) saturate(20%) hue-rotate(299deg)
+    brightness(112%) contrast(87%);
+}
+#closeProjectBtn {
+  margin-bottom: 1rem;
 }

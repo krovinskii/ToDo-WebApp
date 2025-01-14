@@ -1,24 +1,22 @@
-// addTask.js
-export const initialize = () => {
-  const pressTaskBtn = () => {
-    const addTaskBtn = document.getElementById("addTaskBtn");
-    const taskModal = document.getElementById("taskModal");
-    addTaskBtn.addEventListener("click", () => {
-      taskModal.showModal();
-      taskModal.style.display = "flex";
-    });
+const getUserInputElements = () => {
+  const grabInput = () => {
+    const userTaskInput = document.getElementById("userTaskInput");
+    const userDateInput = document.getElementById("userDateInput");
+    const userTimeInput = document.getElementById("userTimeInput");
+    const userLocationInput = document.getElementById("userLocationInput");
+    const userCompletedInput = document.getElementById("userCompletedInput");
+    return {
+      task: userTaskInput,
+      date: userDateInput,
+      time: userTimeInput,
+      location: userLocationInput,
+      completed: userCompletedInput,
+    };
   };
-
-  const pressDialogBtn = () => {
-    const closeDialogBtn = document.getElementById("closeBtn");
-    const taskModal = document.getElementById("taskModal");
-    closeDialogBtn.addEventListener("click", () => {
-      taskModal.close();
-      taskModal.style.display = "none";
-    });
-  };
-
-  return { pressTaskBtn, pressDialogBtn };
+  return { grabInput };
+};
+export const userInputData = {
+  grabInput: getUserInputElements().grabInput,
 };
 
-//refactor, make the eventlistener functions elsewhere so code isnt so tight
+//Purpose is to get the data out of the modal.

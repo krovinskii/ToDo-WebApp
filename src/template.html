@@ -21,6 +21,15 @@
         <div class="welcomeSubtext">Here are your tasks for today.</div>
         <!--Insert dynamic date here in welcomeSubtext?-->
       </div>
+      <div class="projectTabs">
+        <div class="projectHolder">
+          <ul>
+            <li>Default Project</li>
+            <li>Second Project</li>
+          </ul>
+        </div>
+        <button class="addProjectBtn" id="addProjectBtn"><img src="images/plus.svg" /></button>
+      </div>
       <div class="appDisplay">
         <!--Grid Titles-->
         <div class="appDisplayTitle" id="blank1"></div>
@@ -42,7 +51,7 @@
         <button class="addTaskBtn" id="addTaskBtn">Add Task</button>
       </div>
     </div>
-
+<!----------------------------------------------------------Add Task Modal-->
     <dialog id="taskModal" class="modal">
       <div class="taskModalText">What would you like to accomplish?</div>
       <form id="taskForm">
@@ -54,10 +63,28 @@
         <input type="time" id="userTimeInput" name="time" />
         <label for="location">Location:</label>
         <input type="text" id="userLocationInput" name="location" />
-        <label for="task">Completed:</label>
-        <input type="checkbox" id="userCompletedInput" name="completed" />
+        <div class="completedContainer">
+          <label for="task">Completed:</label>
+          <input type="checkbox" id="userCompletedInput" name="completed" />
+        </div>
       </form>
-      <button class="closeBtn" id="closeBtn">X</button>
+      <div class="btnHolder">
+        <button class="submitBtn" id="submitBtn">Submit</button>
+        <button class="closeBtn" id="closeBtn">Close</button>
+      </div>
+    </dialog>
+    <!-----------------------------------------Add Project Modal-->
+    <dialog id="projectModal" class="modal">
+      
+      <form id="taskForm">
+        <label for="projectName">Project Name:</label>
+        <input type="text" id="userProjectInput" name="project" ></textarea>
+        <label for="projectNotes">Notes:</label>
+        <textarea id="userProjectNotes" name="notes" rows="14"></textarea>
+        </div>
+      </form>
+      <button class="closeBtn" id="closeProjectBtn">Close</button>
     </dialog>
   </body>
 </html>
+<!---Need to add submit btn to dialog-->
