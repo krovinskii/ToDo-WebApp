@@ -1,5 +1,5 @@
 // addTask.js
-import { userInputData } from "./addTask.js"; //imported to get data from add task modal. need to make event for the submit btn to invoke this. then take that obj whereever it is stored. is it here or addtask? anyways after that we will have a new module for adding the dom elements.
+import { addUserInput } from "./addTask.js";
 export const initialize = () => {
   // Utility functions for adding and removing modal functionality
   const openModal = (modal) => {
@@ -36,11 +36,16 @@ export const initialize = () => {
     const projectModal = document.getElementById("projectModal");
     closeProjectBtn.addEventListener("click", () => closeModal(projectModal));
   };
+  const submitUserTask = () => {
+    const submitTaskBtn = document.getElementById("submitTaskBtn");
+    submitTaskBtn.addEventListener("click", addUserInput);
+  };
 
   return {
     addTaskButtonListener,
     closeTaskModalListener,
     addProjectButtonListener,
     closeProjectModalListener,
+    submitUserTask,
   };
 };

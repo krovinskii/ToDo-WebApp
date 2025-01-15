@@ -8,9 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     closeTaskModalListener,
     addProjectButtonListener,
     closeProjectModalListener,
+    submitUserTask,
   } = initialize();
   addTaskButtonListener();
   closeTaskModalListener();
   addProjectButtonListener();
   closeProjectModalListener();
+  submitUserTask();
 });
