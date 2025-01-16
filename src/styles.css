@@ -85,6 +85,20 @@ body {
 #blank2 {
   grid-column: 6/6;
 }
+.appDisplayEditRow {
+  grid-column: 1/1;
+  display: flex;
+  justify-content: center;
+}
+.editBtn {
+  padding: 0.35rem 0.75rem;
+  text-align: center;
+  background-color: #0088cc;
+  border-radius: 5px;
+  border: none;
+  color: #eeeeee;
+  font-weight: 600;
+}
 .appDisplayTaskData {
   grid-column: 2/2;
 }

@@ -28,6 +28,13 @@ export const userInputDOM = {
     const currentTaskTime = ` ${time} ${date}`;
     const tasksParent = document.getElementById("appDisplay");
 
+    //edit
+    const editRow = document.createElement("div");
+    editRow.className = "appDisplayEditRow";
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "EDIT";
+    editBtn.className = "editBtn";
+    editRow.appendChild(editBtn);
     //task name
     const taskName = document.createElement("div");
     taskName.textContent = currentTaskName;
@@ -61,6 +68,7 @@ export const userInputDOM = {
     deleteRowBtnRow.appendChild(deleteRowBtn);
 
     //append to existing div
+    tasksParent.appendChild(editRow);
     tasksParent.appendChild(taskName);
     tasksParent.appendChild(taskTime);
     tasksParent.appendChild(taskLocation);
