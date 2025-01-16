@@ -1,5 +1,6 @@
 // addTask.js
 import { addUserInput } from "./addTask.js";
+import { userInputDOM } from "./userInputDOM";
 export const initialize = () => {
   // Utility functions for adding and removing modal functionality
   const openModal = (modal) => {
@@ -38,7 +39,11 @@ export const initialize = () => {
   };
   const submitUserTask = () => {
     const submitTaskBtn = document.getElementById("submitTaskBtn");
-    submitTaskBtn.addEventListener("click", addUserInput);
+    submitTaskBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const { input } = addUserInput(); // Destructure returned input
+      userInputDOM.createTaskDOM(input); // Pass input as parameter
+    });
   };
 
   return {

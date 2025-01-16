@@ -33,6 +33,9 @@ body {
   height: fit-content;
   background-color: #f9f9f9;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .helloUser {
@@ -48,6 +51,7 @@ body {
   font-size: 1.25rem;
   position: relative;
   bottom: 1rem;
+  display: flex;
 }
 
 .appDisplay {
