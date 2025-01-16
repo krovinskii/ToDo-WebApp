@@ -12,10 +12,12 @@ document.addEventListener("DOMContentLoaded", () => {
     addProjectButtonListener,
     closeProjectModalListener,
     submitUserTask,
+    deleteTaskRow,
   } = initialize();
   addTaskButtonListener();
   closeTaskModalListener();
   addProjectButtonListener();
   closeProjectModalListener();
   submitUserTask();
+  deleteTaskRow();
 });

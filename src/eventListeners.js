@@ -41,16 +41,23 @@ export const initialize = () => {
     const submitTaskBtn = document.getElementById("submitTaskBtn");
     submitTaskBtn.addEventListener("click", (e) => {
       e.preventDefault();
-      const { input } = addUserInput(); // Destructure returned input
-      userInputDOM.createTaskDOM(input); // Pass input as parameter
+      const { input } = addUserInput();
+      userInputDOM.createTaskDOM(input);
+      deleteTaskRow();
     });
   };
-
+  const deleteTaskRow = () => {
+    const deleteRowBtn = document.getElementsByClassName("deleteBtn");
+    Array.from(deleteRowBtn).forEach((btn) => {
+      btn.addEventListener("click", userInputDOM.deleteTask);
+    });
+  };
   return {
     addTaskButtonListener,
     closeTaskModalListener,
     addProjectButtonListener,
     closeProjectModalListener,
     submitUserTask,
+    deleteTaskRow,
   };
 };

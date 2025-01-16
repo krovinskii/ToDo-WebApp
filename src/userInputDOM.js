@@ -68,4 +68,25 @@ export const userInputDOM = {
     tasksParent.appendChild(taskCompletedContainer);
     tasksParent.appendChild(deleteRowBtnRow);
   },
+  deleteTask: (e) => {
+    const deleteBtn = e.target;
+    const deleteRow = deleteBtn.closest(".appDisplayDeleteRow");
+    if (!deleteRow) return;
+
+    const taskElements = [
+      deleteRow.previousElementSibling,
+      deleteRow.previousElementSibling.previousElementSibling,
+      deleteRow.previousElementSibling.previousElementSibling
+        .previousElementSibling,
+      deleteRow.previousElementSibling.previousElementSibling
+        .previousElementSibling.previousElementSibling,
+      deleteRow,
+    ];
+
+    taskElements.forEach((element) => {
+      if (element && element.parentNode) {
+        element.parentNode.removeChild(element);
+      }
+    });
+  },
 };
