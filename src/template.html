@@ -23,13 +23,13 @@
       <div class="projectTabs">
         <div class="projectHolder">
           <ul id="projectLists">
-            <li>Default Project</li>
-            <li>Second Project</li>
+            <li class="projectBtn" id="project1">Default Project</li>
+            <li class="projectBtn" id="project2">Second Project</li>
           </ul>
         </div>
         <button class="addProjectBtn" id="addProjectBtn"><img src="images/plus.svg" /></button>
       </div>
-      <div class="appDisplay" id="appDisplay">
+      <div class="appDisplay" id="appDisplay1">
         <!--Grid Titles-->
         <div class="appDisplayTitle" id="blank1"></div>
         <div class="appDisplayTitle" id="task">Task</div>
@@ -49,6 +49,26 @@
           <button class="deleteBtn">X</button>
         </div>
       </div>
+      <div class="appDisplay" id="appDisplay2">
+        <!--Grid Titles-->
+        <div class="appDisplayTitle" id="blank1"></div>
+        <div class="appDisplayTitle" id="task">Task</div>
+        <div class="appDisplayTitle" id="datetime">Date & Time</div>
+        <div class="appDisplayTitle" id="location">Location</div>
+        <div class="appDisplayTitle" id="completed">Completed</div>
+        <div class="appDisplayTitle" id="blank2"></div>
+        <!--Grid Data-->
+        <div class="appDisplayEditRow">
+          <button class="editBtn" >EDIT</button>
+        </div>
+        <div class="appDisplayTaskData">Dive into pool</div>
+        <div class="appDisplayDateTimeData">10:30AM 1/20/22</div>
+        <div class="appDisplayLocationData">Beach</div>
+        <div class="appDisplayCompletedData"><input type="checkbox" /></div>
+        <div class="appDisplayDeleteRow">
+          <button class="deleteBtn">X</button>
+        </div>
+      </div>
       <div class="addTask">
         <button class="addTaskBtn" id="addTaskBtn">Add Task</button>
       </div>
@@ -56,7 +76,7 @@
 <!----------------------------------------------------------Add Task Modal-->
     <dialog id="taskModal" class="modal">
       <div class="taskModalText">What would you like to accomplish?</div>
-      <form id="taskForm">
+      <form class="taskForm" id="taskForm">
         
         <label for="task">Task:</label>
         <textarea id="userTaskInput" name="task" rows="2"></textarea>
@@ -79,7 +99,7 @@
     <!-----------------------------------------Add Project Modal-->
     <dialog id="projectModal" class="modal">
       
-      <form id="taskForm">
+      <form class="taskForm" id="projectForm">
         <label for="projectName">Project Name:</label>
         <input type="text" id="userProjectInput" name="project" ></textarea>
         <label for="projectNotes">Notes:</label>

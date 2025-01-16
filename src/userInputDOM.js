@@ -62,7 +62,14 @@ export const userInputDOM = {
   }),
 
   createTaskDOM: (input) => {
-    const tasksParent = document.getElementById("appDisplay");
+    const activeDisplay = document.querySelector(
+      '.appDisplay[style*="display: grid"]'
+    );
+    if (!activeDisplay) {
+      console.error("No active project display found");
+      return;
+    }
+
     const elements = [
       TaskComponents.elements.createActionButtons(),
       TaskComponents.utils.createGridElement("appDisplayTaskData", input.task),
@@ -78,7 +85,7 @@ export const userInputDOM = {
       TaskComponents.elements.createDeleteRow(),
     ];
 
-    elements.forEach((element) => tasksParent.appendChild(element));
+    elements.forEach((element) => activeDisplay.appendChild(element));
   },
 
   deleteTask: (e) => {
@@ -119,10 +126,59 @@ export const userInputProjectDOM = {
   createProjectDOM: (input) => {
     const { title } = input;
     const projectParent = document.getElementById("projectLists");
+    const appContainer = document.querySelector(".appContainer");
+
+    if (!appContainer) {
+      console.error("appContainer not found");
+      return;
+    }
+
     const newProject = document.createElement("li");
     newProject.innerText = title;
-    console.log(title);
+    newProject.classList.add("projectBtn");
+    newProject.id = `project${projectParent.children.length + 1}`;
+
+    const projectDisplay = document.createElement("div");
+    projectDisplay.className = "appDisplay";
+    projectDisplay.id = `appDisplay${projectParent.children.length + 1}`;
+    projectDisplay.style.display = "none";
+
+    projectDisplay.innerHTML = `
+        <div class="appDisplayTitle" id="blank1"></div>
+        <div class="appDisplayTitle" id="task">Task</div>
+        <div class="appDisplayTitle" id="datetime">Date & Time</div>
+        <div class="appDisplayTitle" id="location">Location</div>
+        <div class="appDisplayTitle" id="completed">Completed</div>
+        <div class="appDisplayTitle" id="blank2"></div>
+    `;
+
+    const addTaskButton = document.querySelector(".addTask");
+    if (addTaskButton) {
+      appContainer.insertBefore(projectDisplay, addTaskButton);
+    } else {
+      appContainer.appendChild(projectDisplay);
+    }
 
     projectParent.appendChild(newProject);
+  },
+};
+
+const ProjectModalEvents = {
+  swapProjects: () => {
+    document.getElementById("projectLists").addEventListener("click", (e) => {
+      if (e.target.classList.contains("projectBtn")) {
+        const projectId = e.target.id;
+        const displayId = `appDisplay-${projectId.split("-")[1]}`;
+
+        document.querySelectorAll(".appDisplay").forEach((display) => {
+          display.style.display = "none";
+        });
+
+        const targetDisplay = document.getElementById(displayId);
+        if (targetDisplay) {
+          targetDisplay.style.display = "grid";
+        }
+      }
+    });
   },
 };

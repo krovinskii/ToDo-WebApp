@@ -189,7 +189,7 @@ body {
   text-align: center;
   color: #eeeeee;
 }
-#taskForm {
+.taskForm {
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem 0rem 2rem;
@@ -301,4 +301,7 @@ textarea {
 #closeProjectBtn,
 #submitProjectBtn {
   margin-bottom: 1rem;
+}
+#appDisplay2 {
+  display: none;
 }

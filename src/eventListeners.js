@@ -40,7 +40,7 @@ const TaskModalEvents = {
     });
   },
   edit: () => {
-    const appDisplay = document.getElementById("appDisplay");
+    const appDisplay = document.getElementById("appDisplay1");
     appDisplay.addEventListener("click", (e) => {
       if (e.target.classList.contains("editBtn")) {
         const editBtn = e.target;
@@ -79,7 +79,7 @@ const TaskModalEvents = {
   },
 
   deleteButton: () => {
-    const appDisplay = document.getElementById("appDisplay");
+    const appDisplay = document.getElementById("appDisplay1");
     appDisplay.addEventListener("click", (e) => {
       if (e.target.classList.contains("deleteBtn")) {
         userInputDOM.deleteTask(e);
@@ -108,12 +108,62 @@ const ProjectModalEvents = {
   submit: () => {
     const submitProjectBtn = document.getElementById("submitProjectBtn");
     const projectModal = document.getElementById("projectModal");
+    const projectForm = document.getElementById("projectForm");
+
+    console.log("Submit button:", submitProjectBtn);
+    console.log("Project form:", projectForm);
+
+    if (!submitProjectBtn || !projectForm) {
+      console.error("Required elements not found");
+      return;
+    }
 
     submitProjectBtn.addEventListener("click", (e) => {
       e.preventDefault();
+      console.log("Submit clicked");
+
       const { input } = addUserProjectInput();
-      userInputProjectDOM.createProjectDOM(input);
-      ModalUtils.close(projectModal);
+      console.log("Project input:", input);
+
+      if (input && input.title) {
+        userInputProjectDOM.createProjectDOM(input);
+        projectForm.reset();
+        ModalUtils.close(projectModal);
+      } else {
+        console.error("Invalid project input");
+      }
+    });
+  },
+
+  swapProjects: () => {
+    document.getElementById("projectLists").addEventListener("click", (e) => {
+      if (e.target.classList.contains("projectBtn")) {
+        const projectId = e.target.id;
+        console.log("Project button clicked:", projectId);
+
+        if (!projectId) {
+          console.error("Project ID is missing");
+          return;
+        }
+
+        const projectNum = projectId.replace("project", "");
+        const displayId = `appDisplay${projectNum}`;
+        console.log("Looking for display:", displayId);
+
+        document.querySelectorAll(".appDisplay").forEach((display) => {
+          console.log("Found display:", display.id);
+          display.style.display = "none";
+        });
+
+        const targetDisplay = document.getElementById(displayId);
+        console.log("Target display:", targetDisplay);
+
+        if (targetDisplay) {
+          targetDisplay.style.display = "grid";
+        } else {
+          console.error(`Display ${displayId} not found`);
+        }
+      }
     });
   },
 };
@@ -123,6 +173,7 @@ export const initialize = () => ({
   closeTaskModalListener: TaskModalEvents.closeButton,
   addProjectButtonListener: ProjectModalEvents.addButton,
   closeProjectModalListener: ProjectModalEvents.closeButton,
+  swapProjects: ProjectModalEvents.swapProjects,
   submitUserTask: TaskModalEvents.submit,
   deleteTaskRow: TaskModalEvents.deleteButton,
   submitProjectBtn: ProjectModalEvents.submit,
