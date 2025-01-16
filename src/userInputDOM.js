@@ -1,4 +1,3 @@
-import { addUserInput } from "./addTask";
 export const userInputDOM = {
   getInputs: () => {
     const userTaskInput = document.getElementById("userTaskInput").value;
@@ -88,5 +87,26 @@ export const userInputDOM = {
         element.parentNode.removeChild(element);
       }
     });
+  },
+};
+
+export const userInputProjectDOM = {
+  getInputs: () => {
+    const userProjectTitle = document.getElementById("userProjectInput").value;
+    const userProjectNotes = document.getElementById("userProjectNotes").value;
+    return {
+      title: userProjectTitle,
+      notes: userProjectNotes,
+    };
+  },
+
+  createProjectDOM: (input) => {
+    const { title } = input;
+    const projectParent = document.getElementById("projectLists");
+    const newProject = document.createElement("li");
+    newProject.innerText = title;
+    console.log(title);
+
+    projectParent.appendChild(newProject);
   },
 };

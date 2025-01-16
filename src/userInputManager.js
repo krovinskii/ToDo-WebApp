@@ -1,14 +1,21 @@
 const createInputManager = () => {
   let userInputArray = [];
+  let userProjectArray = [];
 
   const addInput = (input) => {
     userInputArray.push(input);
     return userInputArray;
   };
 
-  const getAllInputs = () => userInputArray;
+  const addProjectInput = (input) => {
+    userProjectArray.push(input);
+    return userProjectArray;
+  };
 
-  return { addInput, getAllInputs };
+  const getAllInputs = () => userInputArray;
+  const getAllProjects = () => userProjectArray;
+
+  return { addInput, getAllInputs, addProjectInput, getAllProjects };
 };
 
 export const userInputManager = createInputManager();

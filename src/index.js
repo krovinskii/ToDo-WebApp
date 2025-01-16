@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     closeProjectModalListener,
     submitUserTask,
     deleteTaskRow,
+    submitProjectBtn,
   } = initialize();
   addTaskButtonListener();
   closeTaskModalListener();
@@ -20,4 +21,5 @@ document.addEventListener("DOMContentLoaded", () => {
   closeProjectModalListener();
   submitUserTask();
   deleteTaskRow();
+  submitProjectBtn();
 });

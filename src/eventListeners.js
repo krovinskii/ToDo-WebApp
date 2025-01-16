@@ -1,6 +1,7 @@
 // addTask.js
 import { addUserInput } from "./addTask.js";
-import { userInputDOM } from "./userInputDOM";
+import { userInputDOM, userInputProjectDOM } from "./userInputDOM";
+import { addUserProjectInput } from "./addUserProject";
 export const initialize = () => {
   // Utility functions for adding and removing modal functionality
   const openModal = (modal) => {
@@ -44,12 +45,22 @@ export const initialize = () => {
       const { input } = addUserInput();
       userInputDOM.createTaskDOM(input);
       deleteTaskRow();
+      closeModal(taskModal);
     });
   };
   const deleteTaskRow = () => {
     const deleteRowBtn = document.getElementsByClassName("deleteBtn");
     Array.from(deleteRowBtn).forEach((btn) => {
       btn.addEventListener("click", userInputDOM.deleteTask);
+    });
+  };
+  const submitProjectBtn = () => {
+    const submitProjectBtn = document.getElementById("submitProjectBtn");
+    submitProjectBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const { input } = addUserProjectInput();
+      userInputProjectDOM.createProjectDOM(input);
+      closeModal(projectModal);
     });
   };
   return {
@@ -59,5 +70,6 @@ export const initialize = () => {
     closeProjectModalListener,
     submitUserTask,
     deleteTaskRow,
+    submitProjectBtn,
   };
 };
