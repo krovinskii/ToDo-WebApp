@@ -2,81 +2,132 @@
 import { addUserInput } from "./addTask.js";
 import { userInputDOM, userInputProjectDOM } from "./userInputDOM";
 import { addUserProjectInput } from "./addUserProject";
-export const initialize = () => {
-  // Utility functions for adding and removing modal functionality
-  const openModal = (modal) => {
+import { userInputManager } from "./userInputManager";
+
+const ModalUtils = {
+  open: (modal) => {
     modal.showModal();
     modal.style.display = "flex";
-  };
+  },
 
-  const closeModal = (modal) => {
+  close: (modal) => {
     modal.close();
     modal.style.display = "none";
-  };
+  },
+};
 
-  // Event listener functions
-  const addTaskButtonListener = () => {
+const TaskModalEvents = {
+  addButton: () => {
     const addTaskBtn = document.getElementById("addTaskBtn");
     const taskModal = document.getElementById("taskModal");
-    addTaskBtn.addEventListener("click", () => openModal(taskModal));
-  };
+    addTaskBtn.addEventListener("click", () => ModalUtils.open(taskModal));
+  },
 
-  const closeTaskModalListener = () => {
+  closeButton: () => {
     const closeDialogBtn = document.getElementById("closeBtn");
     const taskModal = document.getElementById("taskModal");
-    closeDialogBtn.addEventListener("click", () => closeModal(taskModal));
-  };
+    closeDialogBtn.addEventListener("click", () => ModalUtils.close(taskModal));
+  },
 
-  const addProjectButtonListener = () => {
-    const addProjectBtn = document.getElementById("addProjectBtn");
-    const projectModal = document.getElementById("projectModal");
-    addProjectBtn.addEventListener("click", () => openModal(projectModal));
-  };
-
-  const closeProjectModalListener = () => {
-    const closeProjectBtn = document.getElementById("closeProjectBtn");
-    const projectModal = document.getElementById("projectModal");
-    closeProjectBtn.addEventListener("click", () => closeModal(projectModal));
-  };
-  const submitUserTask = () => {
+  submit: () => {
     const submitTaskBtn = document.getElementById("submitTaskBtn");
+    const taskModal = document.getElementById("taskModal");
+
     submitTaskBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const { input } = addUserInput();
       userInputDOM.createTaskDOM(input);
-      deleteTaskRow();
-      closeModal(taskModal);
+      ModalUtils.close(taskModal);
     });
-  };
-  const deleteTaskRow = () => {
-    const deleteRowBtn = document.getElementsByClassName("deleteBtn");
-    Array.from(deleteRowBtn).forEach((btn) => {
-      btn.addEventListener("click", userInputDOM.deleteTask);
+  },
+  edit: () => {
+    const appDisplay = document.getElementById("appDisplay");
+    appDisplay.addEventListener("click", (e) => {
+      if (e.target.classList.contains("editBtn")) {
+        const editBtn = e.target;
+        const editRow = editBtn.closest(".appDisplayEditRow");
+        const taskElements = [
+          editRow.nextElementSibling,
+          editRow.nextElementSibling.nextElementSibling,
+          editRow.nextElementSibling.nextElementSibling.nextElementSibling,
+        ];
+
+        const isEditing = editBtn.classList.toggle("editing");
+        editBtn.textContent = isEditing ? "SAVE" : "EDIT";
+        editBtn.style.backgroundColor = isEditing ? "green" : "#0088cc";
+
+        // If saving, update the task in userInputManager
+        if (!isEditing) {
+          const taskIndex =
+            Array.from(appDisplay.children).indexOf(editRow) / 6; // 6 elements per task
+
+          const updatedTask = {
+            task: taskElements[0].textContent,
+            time: taskElements[1].textContent.split(" ")[0],
+            date: taskElements[1].textContent.split(" ")[1],
+            location: taskElements[2].textContent,
+          };
+
+          userInputManager.updateTask(taskIndex, updatedTask);
+        }
+
+        taskElements.forEach((element) => {
+          if (element) {
+            element.contentEditable = isEditing;
+            element.classList.toggle("editing");
+          }
+        });
+      }
     });
-  };
-  const submitProjectBtn = () => {
+  },
+
+  deleteButton: () => {
+    const appDisplay = document.getElementById("appDisplay");
+    appDisplay.addEventListener("click", (e) => {
+      if (e.target.classList.contains("deleteBtn")) {
+        userInputDOM.deleteTask(e);
+      }
+    });
+  },
+};
+
+const ProjectModalEvents = {
+  addButton: () => {
+    const addProjectBtn = document.getElementById("addProjectBtn");
+    const projectModal = document.getElementById("projectModal");
+    addProjectBtn.addEventListener("click", () =>
+      ModalUtils.open(projectModal)
+    );
+  },
+
+  closeButton: () => {
+    const closeProjectBtn = document.getElementById("closeProjectBtn");
+    const projectModal = document.getElementById("projectModal");
+    closeProjectBtn.addEventListener("click", () =>
+      ModalUtils.close(projectModal)
+    );
+  },
+
+  submit: () => {
     const submitProjectBtn = document.getElementById("submitProjectBtn");
+    const projectModal = document.getElementById("projectModal");
+
     submitProjectBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const { input } = addUserProjectInput();
       userInputProjectDOM.createProjectDOM(input);
-      closeModal(projectModal);
+      ModalUtils.close(projectModal);
     });
-  };
-  const editTaskBtn = () => {
-    const editTaskBtn = document.getElementById("editBtn");
-    Array.from(editTaskBtn).forEach((btn) => {
-      btn.addEventListener("click", userInputDOM.editTask); //need to create edit Task
-    });
-  };
-  return {
-    addTaskButtonListener,
-    closeTaskModalListener,
-    addProjectButtonListener,
-    closeProjectModalListener,
-    submitUserTask,
-    deleteTaskRow,
-    submitProjectBtn,
-    editTaskBtn,
-  };
+  },
 };
+
+export const initialize = () => ({
+  addTaskButtonListener: TaskModalEvents.addButton,
+  closeTaskModalListener: TaskModalEvents.closeButton,
+  addProjectButtonListener: ProjectModalEvents.addButton,
+  closeProjectModalListener: ProjectModalEvents.closeButton,
+  submitUserTask: TaskModalEvents.submit,
+  deleteTaskRow: TaskModalEvents.deleteButton,
+  submitProjectBtn: ProjectModalEvents.submit,
+  editTaskBtn: TaskModalEvents.edit,
+});
