@@ -139,29 +139,26 @@ const ProjectModalEvents = {
     document.getElementById("projectLists").addEventListener("click", (e) => {
       if (e.target.classList.contains("projectBtn")) {
         const projectId = e.target.id;
-        console.log("Project button clicked:", projectId);
 
-        if (!projectId) {
-          console.error("Project ID is missing");
-          return;
+        // Remove current project highlight
+        const currentProject = document.querySelector(".projectHolderCurrent");
+        if (currentProject) {
+          currentProject.classList.remove("projectHolderCurrent");
         }
 
-        const projectNum = projectId.replace("project", "");
-        const displayId = `appDisplay${projectNum}`;
-        console.log("Looking for display:", displayId);
+        // Add highlight to clicked project
+        e.target.classList.add("projectHolderCurrent");
 
+        // Handle display switching
         document.querySelectorAll(".appDisplay").forEach((display) => {
-          console.log("Found display:", display.id);
           display.style.display = "none";
         });
 
+        const projectNum = projectId.replace("project", "");
+        const displayId = `appDisplay${projectNum}`;
         const targetDisplay = document.getElementById(displayId);
-        console.log("Target display:", targetDisplay);
-
         if (targetDisplay) {
           targetDisplay.style.display = "grid";
-        } else {
-          console.error(`Display ${displayId} not found`);
         }
       }
     });
