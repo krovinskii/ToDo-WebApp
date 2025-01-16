@@ -1,4 +1,3 @@
-// addTask.js
 import { addUserInput } from "./addTask.js";
 import { userInputDOM, userInputProjectDOM } from "./userInputDOM";
 import { addUserProjectInput } from "./addUserProject";
@@ -56,18 +55,15 @@ const TaskModalEvents = {
         editBtn.textContent = isEditing ? "SAVE" : "EDIT";
         editBtn.style.backgroundColor = isEditing ? "green" : "#0088cc";
 
-        // If saving, update the task in userInputManager
         if (!isEditing) {
           const taskIndex =
-            Array.from(appDisplay.children).indexOf(editRow) / 6; // 6 elements per task
-
+            Array.from(appDisplay.children).indexOf(editRow) / 6;
           const updatedTask = {
             task: taskElements[0].textContent,
             time: taskElements[1].textContent.split(" ")[0],
             date: taskElements[1].textContent.split(" ")[1],
             location: taskElements[2].textContent,
           };
-
           userInputManager.updateTask(taskIndex, updatedTask);
         }
 
@@ -75,6 +71,7 @@ const TaskModalEvents = {
           if (element) {
             element.contentEditable = isEditing;
             element.classList.toggle("editing");
+            element.style.border = isEditing ? "2px solid #0088cc" : "none";
           }
         });
       }
