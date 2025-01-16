@@ -63,6 +63,12 @@ export const initialize = () => {
       closeModal(projectModal);
     });
   };
+  const editTaskBtn = () => {
+    const editTaskBtn = document.getElementById("editBtn");
+    Array.from(editTaskBtn).forEach((btn) => {
+      btn.addEventListener("click", userInputDOM.editTask); //need to create edit Task
+    });
+  };
   return {
     addTaskButtonListener,
     closeTaskModalListener,
@@ -71,5 +77,6 @@ export const initialize = () => {
     submitUserTask,
     deleteTaskRow,
     submitProjectBtn,
+    editTaskBtn,
   };
 };

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     submitUserTask,
     deleteTaskRow,
     submitProjectBtn,
+    editTaskBtn,
   } = initialize();
   addTaskButtonListener();
   closeTaskModalListener();
@@ -22,4 +23,5 @@ document.addEventListener("DOMContentLoaded", () => {
   submitUserTask();
   deleteTaskRow();
   submitProjectBtn();
+  editTaskBtn();
 });

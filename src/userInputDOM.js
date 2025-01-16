@@ -1,80 +1,86 @@
+const TaskComponents = {
+  utils: {
+    createGridElement: (className, text = "") => {
+      const element = document.createElement("div");
+      element.className = className;
+      element.textContent = text;
+      return element;
+    },
+
+    createButton: (text, className) => {
+      const button = document.createElement("button");
+      button.textContent = text;
+      button.className = className;
+      return button;
+    },
+
+    createCheckbox: (checked) => {
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = checked;
+      checkbox.className = "taskCheckbox";
+      return checkbox;
+    },
+  },
+
+  elements: {
+    createActionButtons: () => {
+      const buttonRow =
+        TaskComponents.utils.createGridElement("appDisplayEditRow");
+      const editBtn = TaskComponents.utils.createButton("EDIT", "editBtn");
+      buttonRow.appendChild(editBtn);
+      return buttonRow;
+    },
+
+    createDeleteRow: () => {
+      const deleteRow = TaskComponents.utils.createGridElement(
+        "appDisplayDeleteRow"
+      );
+      const deleteBtn = TaskComponents.utils.createButton("X", "deleteBtn");
+      deleteRow.appendChild(deleteBtn);
+      return deleteRow;
+    },
+
+    createCheckboxWrapper: (checked) => {
+      const wrapper = TaskComponents.utils.createGridElement(
+        "appDisplayCompletedData"
+      );
+      const checkbox = TaskComponents.utils.createCheckbox(checked);
+      wrapper.appendChild(checkbox);
+      return wrapper;
+    },
+  },
+};
+
 export const userInputDOM = {
-  getInputs: () => {
-    const userTaskInput = document.getElementById("userTaskInput").value;
-    const userDateInput = document.getElementById("userDateInput").value;
-    const userTimeInput = document.getElementById("userTimeInput").value;
-    const userLocationInput =
-      document.getElementById("userLocationInput").value;
-    const userCompletedInput =
-      document.getElementById("userCompletedInput").checked;
+  getInputs: () => ({
+    task: document.getElementById("userTaskInput").value,
+    date: document.getElementById("userDateInput").value,
+    time: document.getElementById("userTimeInput").value,
+    location: document.getElementById("userLocationInput").value,
+    completed: document.getElementById("userCompletedInput").checked,
+  }),
 
-    return {
-      task: userTaskInput,
-      date: userDateInput,
-      time: userTimeInput,
-      location: userLocationInput,
-      completed: userCompletedInput,
-    };
-  },
   createTaskDOM: (input) => {
-    const {
-      task: currentTaskName,
-      date,
-      time,
-      location: currentTaskLocation,
-      completed: currentTaskCompleted,
-    } = input;
-
-    const currentTaskTime = ` ${time} ${date}`;
     const tasksParent = document.getElementById("appDisplay");
+    const elements = [
+      TaskComponents.elements.createActionButtons(),
+      TaskComponents.utils.createGridElement("appDisplayTaskData", input.task),
+      TaskComponents.utils.createGridElement(
+        "appDisplayDateTimeData",
+        `${input.time} ${input.date}`
+      ),
+      TaskComponents.utils.createGridElement(
+        "appDisplayLocationData",
+        input.location
+      ),
+      TaskComponents.elements.createCheckboxWrapper(input.completed),
+      TaskComponents.elements.createDeleteRow(),
+    ];
 
-    //edit
-    const editRow = document.createElement("div");
-    editRow.className = "appDisplayEditRow";
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "EDIT";
-    editBtn.className = "editBtn";
-    editRow.appendChild(editBtn);
-    //task name
-    const taskName = document.createElement("div");
-    taskName.textContent = currentTaskName;
-    taskName.className = "appDisplayTaskData";
-    //task time
-    const taskTime = document.createElement("div");
-    taskTime.textContent = currentTaskTime;
-    taskTime.className = "appDisplayDateTimeData";
-    //task location
-    const taskLocation = document.createElement("div");
-    taskLocation.textContent = currentTaskLocation;
-    taskLocation.className = "appDisplayLocationData";
-    //task checkbox
-    const taskCompletedContainer = document.createElement("div");
-    taskCompletedContainer.className = "appDisplayCompletedData";
-
-    const taskCompleted = document.createElement("input");
-    taskCompleted.type = "checkbox";
-    taskCompleted.checked = currentTaskCompleted;
-    taskCompleted.className = "appDisplayCompletedData";
-
-    taskCompletedContainer.appendChild(taskCompleted);
-    //task delete row
-    const deleteRowBtnRow = document.createElement("div");
-    deleteRowBtnRow.className = "appDisplayDeleteRow";
-
-    const deleteRowBtn = document.createElement("button");
-    deleteRowBtn.className = "deleteBtn";
-    deleteRowBtn.innerText = "X";
-
-    deleteRowBtnRow.appendChild(deleteRowBtn);
-
-    //append to existing div
-    tasksParent.appendChild(editRow);
-    tasksParent.appendChild(taskName);
-    tasksParent.appendChild(taskTime);
-    tasksParent.appendChild(taskLocation);
-    tasksParent.appendChild(taskCompletedContainer);
-    tasksParent.appendChild(deleteRowBtnRow);
+    elements.forEach((element) => tasksParent.appendChild(element));
   },
+
   deleteTask: (e) => {
     const deleteBtn = e.target;
     const deleteRow = deleteBtn.closest(".appDisplayDeleteRow");
@@ -87,6 +93,8 @@ export const userInputDOM = {
         .previousElementSibling,
       deleteRow.previousElementSibling.previousElementSibling
         .previousElementSibling.previousElementSibling,
+      deleteRow.previousElementSibling.previousElementSibling
+        .previousElementSibling.previousElementSibling.previousElementSibling,
       deleteRow,
     ];
 
