@@ -61,6 +61,34 @@ export const userInputDOM = {
     completed: document.getElementById("userCompletedInput").checked,
   }),
 
+  sortTasksInDOM: (activeDisplay) => {
+    const taskGroups = [];
+    const displayChildren = Array.from(activeDisplay.children);
+
+    // Skip grid headers (first 6 elements)
+    for (let i = 6; i < displayChildren.length; i += 6) {
+      const group = displayChildren.slice(i, i + 6);
+      if (group.length === 6) {
+        taskGroups.push(group);
+      }
+    }
+
+    // Sort by datetime
+    taskGroups.sort((a, b) => {
+      const dateTimeA = a[2].textContent.split(" "); // [time, date]
+      const dateTimeB = b[2].textContent.split(" ");
+
+      const timestampA = new Date(`${dateTimeA[1]} ${dateTimeA[0]}`);
+      const timestampB = new Date(`${dateTimeB[1]} ${dateTimeB[0]}`);
+
+      return timestampA - timestampB;
+    });
+
+    // Remove and reinsert
+    taskGroups.flat().forEach((element) => element.remove());
+    taskGroups.flat().forEach((element) => activeDisplay.appendChild(element));
+  },
+
   createTaskDOM: (input) => {
     const activeDisplay = document.querySelector(
       '.appDisplay[style*="display: grid"]'
@@ -86,6 +114,7 @@ export const userInputDOM = {
     ];
 
     elements.forEach((element) => activeDisplay.appendChild(element));
+    userInputDOM.sortTasksInDOM(activeDisplay);
   },
 
   deleteTask: (e) => {

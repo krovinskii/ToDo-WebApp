@@ -40,11 +40,23 @@ const TaskModalEvents = {
     });
   },
   edit: () => {
-    const appDisplay = document.getElementById("appDisplay1");
-    appDisplay.addEventListener("click", (e) => {
+    const appContainer = document.querySelector(".appContainer");
+    if (!appContainer) {
+      console.error("appContainer not found");
+      return;
+    }
+
+    appContainer.addEventListener("click", (e) => {
       if (e.target.classList.contains("editBtn")) {
         const editBtn = e.target;
         const editRow = editBtn.closest(".appDisplayEditRow");
+        const activeDisplay = editRow.closest(".appDisplay");
+
+        if (!activeDisplay) {
+          console.error("Active display not found");
+          return;
+        }
+
         const taskElements = [
           editRow.nextElementSibling,
           editRow.nextElementSibling.nextElementSibling,
@@ -57,7 +69,7 @@ const TaskModalEvents = {
 
         if (!isEditing) {
           const taskIndex =
-            Array.from(appDisplay.children).indexOf(editRow) / 6;
+            Array.from(activeDisplay.children).indexOf(editRow) / 6;
           const updatedTask = {
             task: taskElements[0].textContent,
             time: taskElements[1].textContent.split(" ")[0],
@@ -79,8 +91,13 @@ const TaskModalEvents = {
   },
 
   deleteButton: () => {
-    const appDisplay = document.getElementById("appDisplay1");
-    appDisplay.addEventListener("click", (e) => {
+    const appContainer = document.querySelector(".appContainer");
+    if (!appContainer) {
+      console.error("appContainer not found");
+      return;
+    }
+
+    appContainer.addEventListener("click", (e) => {
       if (e.target.classList.contains("deleteBtn")) {
         userInputDOM.deleteTask(e);
       }
@@ -140,16 +157,13 @@ const ProjectModalEvents = {
       if (e.target.classList.contains("projectBtn")) {
         const projectId = e.target.id;
 
-        // Remove current project highlight
         const currentProject = document.querySelector(".projectHolderCurrent");
         if (currentProject) {
           currentProject.classList.remove("projectHolderCurrent");
         }
 
-        // Add highlight to clicked project
         e.target.classList.add("projectHolderCurrent");
 
-        // Handle display switching
         document.querySelectorAll(".appDisplay").forEach((display) => {
           display.style.display = "none";
         });

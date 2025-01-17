@@ -296,6 +296,25 @@ textarea {
   align-items: center;
   justify-content: center;
 }
+.addProjectBtn:hover,
+.addProjectBtn.active,
+.submitBtn:hover,
+.submitBtn:active,
+.editBtn:active,
+.editBtn:hover,
+.addTaskBtn:active,
+.addTaskBtn:hover,
+.projectHolder li:hover {
+  background-color: #0091d9;
+  cursor: pointer;
+}
+.deleteBtn:active,
+.deleteBtn:hover,
+.closeBtn:active,
+.closeBtn:hover {
+  background-color: rgb(255, 70, 70);
+  cursor: pointer;
+}
 .addProjectBtn img {
   height: 1.25rem;
   width: auto;

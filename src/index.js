@@ -7,9 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const date = exportedDate;
   const handlers = initialize();
 
-  Object.entries(handlers).forEach(([_, handler]) => handler());
+  Object.entries(handlers).forEach(([_, handler]) => {
+    if (handler) handler();
+  });
 });
 
 //edit doesnt work on other projects besides the first one
 //delete doesnt work on other projects besides the first one
-//if after the second prokect, aka a created one, it applies the task to the default and the created project.
+//add local storage
+//add a way to see all tasks at once.
+//add a way to sort tasks by date
