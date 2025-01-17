@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
+      rel="stylesheet"
+    />
+  <script defer src="main.js"></script></head>
+  <body>
+    <div class="appContainer">
+      <div class="welcomeText">
+        <div class="helloUser">
+          Hello,
+          <h4>User!</h4>
+        </div>
+        <div class="welcomeSubtext">Here are your tasks for &nbsp;<h4 id="todaysDate"></h4>.</div>
+      </div>
+      <div class="projectTabs">
+        <div class="projectHolder">
+          <ul id="projectLists">
+            <li class="projectBtn" id="project1">Default Project</li>
+            <li class="projectBtn" id="project2">Second Project</li>
+          </ul>
+        </div>
+        <button class="addProjectBtn" id="addProjectBtn"><img src="e29461eb2a0c3e0a5398.svg" /></button>
+      </div>
+      <div class="appDisplay" id="appDisplay1">
+        <!--Grid Titles-->
+        <div class="appDisplayTitle" id="blank1"></div>
+        <div class="appDisplayTitle" id="task">Task</div>
+        <div class="appDisplayTitle" id="datetime">Date & Time</div>
+        <div class="appDisplayTitle" id="location">Location</div>
+        <div class="appDisplayTitle" id="completed">Completed</div>
+        <div class="appDisplayTitle" id="blank2"></div>
+        <!--Grid Data-->
+        <div class="appDisplayEditRow">
+          <button class="editBtn" >EDIT</button>
+        </div>
+        <div class="appDisplayTaskData">Clean car</div>
+        <div class="appDisplayDateTimeData">10:30AM 1/20/22</div>
+        <div class="appDisplayLocationData">Car Wash</div>
+        <div class="appDisplayCompletedData"><input type="checkbox" /></div>
+        <div class="appDisplayDeleteRow">
+          <button class="deleteBtn">X</button>
+        </div>
+      </div>
+      <div class="appDisplay" id="appDisplay2">
+        <!--Grid Titles-->
+        <div class="appDisplayTitle" id="blank1"></div>
+        <div class="appDisplayTitle" id="task">Task</div>
+        <div class="appDisplayTitle" id="datetime">Date & Time</div>
+        <div class="appDisplayTitle" id="location">Location</div>
+        <div class="appDisplayTitle" id="completed">Completed</div>
+        <div class="appDisplayTitle" id="blank2"></div>
+        <!--Grid Data-->
+        <div class="appDisplayEditRow">
+          <button class="editBtn" >EDIT</button>
+        </div>
+        <div class="appDisplayTaskData">Dive into pool</div>
+        <div class="appDisplayDateTimeData">10:30AM 1/20/22</div>
+        <div class="appDisplayLocationData">Beach</div>
+        <div class="appDisplayCompletedData"><input type="checkbox" /></div>
+        <div class="appDisplayDeleteRow">
+          <button class="deleteBtn">X</button>
+        </div>
+      </div>
+      <div class="addTask">
+        <button class="addTaskBtn" id="addTaskBtn">Add Task</button>
+      </div>
+    </div>
+<!----------------------------------------------------------Add Task Modal-->
+    <dialog id="taskModal" class="modal">
+      <div class="taskModalText">What would you like to accomplish?</div>
+      <form class="taskForm" id="taskForm">
+        
+        <label for="task">Task:</label>
+        <textarea id="userTaskInput" name="task" rows="2"></textarea>
+        <label for="date">Date:</label>
+        <input type="date" id="userDateInput" name="date" />
+        <label for="time">Time:</label>
+        <input type="time" id="userTimeInput" name="time" />
+        <label for="location">Location:</label>
+        <input type="text" id="userLocationInput" name="location" />
+        <div class="completedContainer">
+          <label for="task">Completed:</label>
+          <input type="checkbox" id="userCompletedInput" name="completed" />
+        </div>
+      </form>
+      <div class="btnHolder">
+        <button class="submitBtn" id="submitTaskBtn">Submit</button>
+        <button class="closeBtn" id="closeBtn">Close</button>
+      </div>
+    </dialog>
+    <!-----------------------------------------Add Project Modal-->
+    <dialog id="projectModal" class="modal">
+      
+      <form class="taskForm" id="projectForm">
+        <label for="projectName">Project Name:</label>
+        <input type="text" id="userProjectInput" name="project" ></textarea>
+        <label for="projectNotes">Notes:</label>
+        <textarea id="userProjectNotes" name="notes" rows="14"></textarea>
+        </div>
+      </form>
+      <div class="btnHolder">
+        <button class="submitBtn" id="submitProjectBtn">Submit</button>
+        <button class="closeBtn" id="closeProjectBtn">Close</button>
+        
+      </div>
+    </dialog>
+  </body>
+</html>
+<!---Need to add submit btn to dialog-->
